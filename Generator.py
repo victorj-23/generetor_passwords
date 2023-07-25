@@ -1,10 +1,10 @@
+import random
+
 def give_char():
-    import random
     chars = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     return random.choice(chars)
 
 def give_special_char():
-    import random
     special_chars = '.+-[]*~_@#:?'
     return random.choice(special_chars)
 
