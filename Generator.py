@@ -1,4 +1,5 @@
 import random
+import re
 
 def give_char():
     chars = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -7,6 +8,18 @@ def give_char():
 def give_special_char():
     special_chars = '.+-[]*~_@#:?'
     return random.choice(special_chars)
+
+def check_password(string):
+    if not re.search(r'\d', string):
+        return False
+    if not re.search(r'[A-Z]', string):
+        return False
+    if not re.search(r'[a-z]', string):
+        return False
+    if not re.search(r'[.,+,-,\[,\],*,~,_,@,#,:,?]', string):
+        return False
+
+    return True
 
 drawing_asc2 =''' 
   ___                              _       ___                       _           
@@ -28,9 +41,16 @@ while True:
     except ValueError:
         print('\033[31m' + 'ERROR: Use integers numbers' + '\033[0;0m')
 
-for _ in range(passwords):
-    generate_passwords = ''
+list_passwords =[]
+
+while len(list_passwords) < passwords:
+    generate_password = ''
     for _ in range(lenght - 1):
-        generate_passwords += give_char()
-    generate_passwords += give_special_char()
-    print(generate_passwords)
+        generate_password += give_char()
+    generate_password += give_special_char()
+
+    if check_password(generate_password):
+        list_passwords.append(generate_password)
+
+for p in list_passwords:
+    print(p)
