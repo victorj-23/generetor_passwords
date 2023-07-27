@@ -21,6 +21,9 @@ while True:
     try:
         passwords = int(input('How many passwords do you want? '))
         lenght = int(input('What length for the passwords? '))
+        if passwords < 1  or lenght < 1:
+            print('\033[31m' + 'ERROR: Use positives numbers' + '\033[0;0m')  
+            continue
         break
     except ValueError:
         print('\033[31m' + 'ERROR: Use integers numbers' + '\033[0;0m')
