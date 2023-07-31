@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Python virtual environment
+venv/
+env/
+
+# Pipenv
+Pipfile.lock
+
+# IDE / Editor specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Local configuration, if applicable
+config.local.ini
+
+# Logs
+*.log
