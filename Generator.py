@@ -1,25 +1,4 @@
-import random
-import re
-
-def give_char():
-    chars = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    return random.choice(chars)
-
-def give_special_char():
-    special_chars = '.+-[]*~_@#:?'
-    return random.choice(special_chars)
-
-def check_password(string):
-    if not re.search(r'\d', string):
-        return False
-    if not re.search(r'[A-Z]', string):
-        return False
-    if not re.search(r'[a-z]', string):
-        return False
-    if not re.search(r'[.,+,-,\[,\],*,~,_,@,#,:,?]', string):
-        return False
-
-    return True
+import utilities
 
 drawing_asc2 =''' 
   ___                              _       ___                       _           
@@ -30,26 +9,34 @@ drawing_asc2 ='''
 '''
 print('\033[32m' + drawing_asc2 + '\033[0;0m')
 
+
+# Data entry and some checks take place
 while True:
     try:
         passwords = int(input('How many passwords do you want? '))
-        lenght = int(input('What length for the passwords? '))
+        lenght = int(input('''What lenght for the passwords \033[31m(Min = 4)\033[0;0m? '''))
         if passwords < 1  or lenght < 1:
-            print('\033[31m' + 'ERROR: Use positives numbers' + '\033[0;0m')  
+            print('\033[31m' + 'ERROR: Use positives numbers' + '\033[0;0m')
             continue
+        if lenght < 4:
+            print('\033[31m' + 'ERROR: lenght below 4 is not accepted ' + '\033[0;0m')
+            continue
+        if lenght < 8:
+            print('\033[32m' + 'Tip: use passwords with at least 8 characters' + '\033[0;0m')
         break
     except ValueError:
         print('\033[31m' + 'ERROR: Use integers numbers' + '\033[0;0m')
 
 list_passwords =[]
 
+# Generator working
 while len(list_passwords) < passwords:
     generate_password = ''
     for _ in range(lenght - 1):
-        generate_password += give_char()
-    generate_password += give_special_char()
+        generate_password += utilities.give_char()
+    generate_password += utilities.give_special_char()
 
-    if check_password(generate_password):
+    if utilities.check_password(generate_password): # The password needs to meet some requirements
         list_passwords.append(generate_password)
 
 for p in list_passwords:
