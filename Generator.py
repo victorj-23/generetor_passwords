@@ -39,21 +39,7 @@ while len(list_passwords) < passwords:
     if check_password(genereted_password): # The password needs to meet some requirements
         list_passwords.append(genereted_password)
 
-for p in list_passwords:
-    print(p)
+for passwords in list_passwords:
+    print(passwords)
 
-question = str(input('Do you want to save in .txt [Yes/No] ? ')).upper()
-if question[0] == 'Y':
-    existing_passwords = []
-    try:
-        with open('passwords.txt', 'r') as archive:
-            existing_passwords = archive.read().splitlines()
-    except FileNotFoundError:
-        pass
-
-    updated_passwords = existing_passwords + list_passwords
-
-    with open('passwords.txt', 'w') as exit:
-        for passwords in updated_passwords:
-            print(passwords, file=exit)
-        exit.write('-' * len(max(list_passwords, key=len)))
+save_password(list_passwords)
