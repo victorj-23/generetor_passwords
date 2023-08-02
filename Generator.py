@@ -1,4 +1,4 @@
-import utilities
+from utilities import *
 
 drawing_asc2 =''' 
   ___                              _       ___                       _           
@@ -33,10 +33,10 @@ list_passwords =[]
 while len(list_passwords) < passwords:
     genereted_password = ''
     for _ in range(lenght - 1):
-        genereted_password += utilities.give_char()
-    genereted_password += utilities.give_special_char()
+        genereted_password += give_char()
+    genereted_password += give_special_char()
 
-    if utilities.check_password(genereted_password): # The password needs to meet some requirements
+    if check_password(genereted_password): # The password needs to meet some requirements
         list_passwords.append(genereted_password)
 
 for p in list_passwords:
