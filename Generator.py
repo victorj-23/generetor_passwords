@@ -31,13 +31,29 @@ list_passwords =[]
 
 # Generator working
 while len(list_passwords) < passwords:
-    generate_password = ''
+    genereted_password = ''
     for _ in range(lenght - 1):
-        generate_password += utilities.give_char()
-    generate_password += utilities.give_special_char()
+        genereted_password += utilities.give_char()
+    genereted_password += utilities.give_special_char()
 
-    if utilities.check_password(generate_password): # The password needs to meet some requirements
-        list_passwords.append(generate_password)
+    if utilities.check_password(genereted_password): # The password needs to meet some requirements
+        list_passwords.append(genereted_password)
 
 for p in list_passwords:
     print(p)
+
+question = str(input('Do you want to save in .txt [Yes/No] ? ')).upper()
+if question[0] == 'Y':
+    existing_passwords = []
+    try:
+        with open('passwords.txt', 'r') as archive:
+            existing_passwords = archive.read().splitlines()
+    except FileNotFoundError:
+        pass
+
+    updated_passwords = existing_passwords + list_passwords
+
+    with open('passwords.txt', 'w') as exit:
+        for passwords in updated_passwords:
+            print(passwords, file=exit)
+        exit.write('-' * len(max(list_passwords, key=len)))
