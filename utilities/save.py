@@ -9,15 +9,15 @@ def save_password(pre_list):
     
     if question[0] == 'Y':
         existing_passwords = []
-    try:
-        with open('passwords.txt', 'r') as archive:
-            existing_passwords = archive.read().splitlines()
-    except FileNotFoundError:
-        pass
+        try:
+            with open('passwords.txt', 'r') as archive:
+                existing_passwords = archive.read().splitlines()
+        except FileNotFoundError:
+            pass
 
-    updated_passwords = existing_passwords + pre_list
+        updated_passwords = existing_passwords + pre_list
 
-    with open('passwords.txt', 'w') as exit:
-        for passwords in updated_passwords:
-            print(passwords, file=exit)
-        exit.write('-' * len(max(pre_list, key=len)))
+        with open('passwords.txt', 'w') as exit:
+            for passwords in updated_passwords:
+                print(passwords, file=exit)
+            exit.write('-' * len(max(pre_list, key=len)))
